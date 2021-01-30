@@ -12,31 +12,34 @@
             let choice = choices[Math.floor(Math.random()*choices.length)];
             return choice;
         }
+        function playerPlay(){
+            return window.prompt("Rock, Paper, Scissor?").toLocaleLowerCase()
+        }
 
 
-        function playRound(computerSelection) {
-            let playerPlay = window.prompt("Rock, Paper, Scissor?").toLocaleLowerCase()
+        function playRound(computerSelection, playerSelection) {
+            let playerTurn = playerSelection()
             let compSel = computerSelection()
             
-            if(compSel == playerPlay) {
+            if(compSel == playerTurn) {
                 return "It is a tie.";
             }
-            else if(compSel == "rock" && playerPlay == "paper") {
+            else if(compSel == "rock" && playerTurn == "paper") {
                 return "You win, Paper beats Rock."
             }
-            else if(compSel == "rock" && playerPlay == "scissor") {
+            else if(compSel == "rock" && playerTurn == "scissor") {
                 return "You lose, Rock beats Scissor."
             }
-            else if(compSel == "paper" && playerPlay == "rock") {
+            else if(compSel == "paper" && playerTurn == "rock") {
                 return "You lose, Paper beats Rock."
             }
-            else if(compSel == "paper" && playerPlay == "scissor") {
+            else if(compSel == "paper" && playerTurn == "scissor") {
                 return "You win, Scissor beats Paper."
             }
-            else if(compSel == "scissor" && playerPlay == "rock") {
+            else if(compSel == "scissor" && playerTurn == "rock") {
                 return "You win, Rock beats Scissor."
             }
-            else if(compSel == "scissor" && playerPlay == "paper") {
+            else if(compSel == "scissor" && playerTurn == "paper") {
                 return "You lose, Scissor beats paper."
             }
             
@@ -47,7 +50,7 @@
             let computerCounter = 0;
             let roundResult;
             for(let i = 0; i < 5; i++) {
-                roundResult = playRound(computerPlay)
+                roundResult = playRound(computerPlay, playerPlay)
                 console.log(roundResult)
                 if(roundResult.includes("win")){
                     playerCounter++
