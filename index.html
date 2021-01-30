@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function computerPlay() {
+            let choices = ["rock", "paper", "scissor"]
+            let choice = choices[Math.floor(Math.random()*choices.length)];
+            return choice;
+        }
+
+
+        function playRound(computerSelection) {
+            let playerPlay = window.prompt("Rock, Paper, Scissor?").toLocaleLowerCase()
+            let compSel = computerSelection()
+            
+            if(compSel == playerPlay) {
+                return "It is a tie.";
+            }
+            else if(compSel == "rock" && playerPlay == "paper") {
+                return "You win, Paper beats Rock."
+            }
+            else if(compSel == "rock" && playerPlay == "scissor") {
+                return "You lose, Rock beats Scissor."
+            }
+            else if(compSel == "paper" && playerPlay == "rock") {
+                return "You lose, Paper beats Rock."
+            }
+            else if(compSel == "paper" && playerPlay == "scissor") {
+                return "You win, Scissor beats Paper."
+            }
+            else if(compSel == "scissor" && playerPlay == "rock") {
+                return "You win, Rock beats Scissor."
+            }
+            else if(compSel == "scissor" && playerPlay == "paper") {
+                return "You lose, Scissor beats paper."
+            }
+            
+        }
+
+        function game() {
+            let playerCounter = 0;
+            let computerCounter = 0;
+            let roundResult;
+            for(let i = 0; i < 5; i++) {
+                roundResult = playRound(computerPlay)
+                console.log(roundResult)
+                if(roundResult.includes("win")){
+                    playerCounter++
+                }else if(roundResult.includes("lose")){
+                    computerCounter++
+                }
+                
+            }
+            if(playerCounter > computerCounter){
+                console.log(`Player wins the game by ${playerCounter} to ${computerCounter}.`)
+            }else if(computerCounter > playerCounter){
+                console.log(`Computer wins the game by ${computerCounter} to ${playerCounter}.`)
+            }else{
+                console.log(`It is a tie.`)
+            }
+
+        }
+        game()
+
+
+    </script>
+</body>
+</html>
