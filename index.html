@@ -6,6 +6,8 @@
     <title>Document</title>
 </head>
 <body>
+    <div id="container"></div>
+
     <script>
         function computerPlay() {
             let choices = ["rock", "paper", "scissor"]
@@ -18,57 +20,97 @@
 
 
         function playRound(computerSelection, playerSelection) {
-            let playerTurn = playerSelection()
+            let playerTurn = playerSelection
             let compSel = computerSelection()
+
+            if(compCounter.textContent > 4 || playerCounter.textContent > 4) {
+                
+                if(compCounter.textContent > 4) return winner.textContent = `We have a winner, Computer won the game!`
+                return winner.textContent = `We have a winner, You won the game!`
+                
+            }
             
             if(compSel == playerTurn) {
+                div.textContent = "It is a tie."
                 return "It is a tie.";
             }
             else if(compSel == "rock" && playerTurn == "paper") {
+                div.textContent = "You win, Paper beats Rock."
+                playerCounter.textContent++
                 return "You win, Paper beats Rock."
             }
             else if(compSel == "rock" && playerTurn == "scissor") {
+                div.textContent = "You lose, Rock beats Scissor."
+                compCounter.textContent++
                 return "You lose, Rock beats Scissor."
             }
             else if(compSel == "paper" && playerTurn == "rock") {
+                div.textContent =  "You lose, Paper beats Rock."
+                compCounter.textContent++
                 return "You lose, Paper beats Rock."
             }
             else if(compSel == "paper" && playerTurn == "scissor") {
+                div.textContent =  "You win, Scissor beats Paper."
+                playerCounter.textContent++
                 return "You win, Scissor beats Paper."
             }
             else if(compSel == "scissor" && playerTurn == "rock") {
+                div.textContent =  "You win, Rock beats Scissor."
+                playerCounter.textContent++
                 return "You win, Rock beats Scissor."
             }
             else if(compSel == "scissor" && playerTurn == "paper") {
+                div.textContent =  "You lose, Scissor beats paper."
+                compCounter.textContent++
                 return "You lose, Scissor beats paper."
             }
             
         }
 
-        function game() {
-            let playerCounter = 0;
-            let computerCounter = 0;
-            let roundResult;
-            for(let i = 0; i < 5; i++) {
-                roundResult = playRound(computerPlay, playerPlay)
-                console.log(roundResult)
-                if(roundResult.includes("win")){
-                    playerCounter++
-                }else if(roundResult.includes("lose")){
-                    computerCounter++
-                }
-                
-            }
-            if(playerCounter > computerCounter){
-                console.log(`Player wins the game by ${playerCounter} to ${computerCounter}.`)
-            }else if(computerCounter > playerCounter){
-                console.log(`Computer wins the game by ${computerCounter} to ${playerCounter}.`)
-            }else{
-                console.log(`It is a tie.`)
-            }
+        let container = document.querySelector("#container");        
+        
+        let rockBtn = document.createElement("button");
+        rockBtn.textContent = "Rock";
 
-        }
-        game()
+        let paperBtn = document.createElement("button");
+        paperBtn.textContent = "Paper";
+
+        let scissorBtn = document.createElement("button");
+        scissorBtn.textContent = "Scissor";
+
+        let div = document.createElement("div");
+
+        let compScore = document.createElement("div");
+        let playerScore = document.createElement("div");
+        let compCounter = document.createElement("p");
+        let playerCounter = document.createElement("p");
+        let winner = document.createElement("p")
+
+        compScore.textContent = `Computer Score:`;
+        playerScore.textContent = `Player Score:`;
+        compCounter.textContent = 0;
+        playerCounter.textContent = 0;
+        winner.textContent = ""
+
+        
+
+
+        container.appendChild(rockBtn);
+        container.appendChild(paperBtn);
+        container.appendChild(scissorBtn);
+        container.appendChild(div)
+        container.appendChild(compScore)
+        container.appendChild(playerScore)
+        compScore.appendChild(compCounter)
+        playerScore.appendChild(playerCounter)
+        container.appendChild(winner)
+        
+
+        rockBtn.addEventListener("click", (e) => playRound(computerPlay, "rock"))
+        paperBtn.addEventListener("click", (e) => playRound(computerPlay, "paper"))
+        scissorBtn.addEventListener("click", (e) => playRound(computerPlay, "scissor"))
+
+
 
 
     </script>
